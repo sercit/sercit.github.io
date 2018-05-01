@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Simon Rusin</title>
-  <meta name="description" content="My first page on github pages">
+  <title>uchi.ru</title>
+  <meta name="description" content="uchi.ru test task">
   <meta name="author" content="Simon Rusin">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
@@ -14,10 +14,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
 </head>
-
 <body>
-<h1>Hello, World!</h1>
-<a href="/uchi/">uchi.ru test task</a>
+  <canvas id="myCanvas" width="875" height="100" style="border:1px solid red"></canvas>
+  <img src="img/sprite.png">
+
+  <script>
+    var amax = 9,
+    amin = 6,
+    abmax = 14,
+    abmin = 11;
+    var a = Math.floor(Math.random()*(amax - amin + 1))+amin;
+    var ab = Math.floor(Math.random()*(abmax - abmin + 1))+abmin;
+    var b = ab-a;
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.scale(0.75,1);
+    ctx.beginPath();
+    ctx.arc(53,100,20,Math.PI,2*Math.PI);
+    ctx.fillText(a+" + "+b+" = "+ab,10,50);
+    document.createElement('canvas')
+    ctx.moveTo(145,50);
+    ctx.lineTo(160,50);
+    ctx.lineTo(160,65);
+    ctx.stroke();
+  </script>
+
   <script src="js/scripts.js"></script>
 </body>
 </html>

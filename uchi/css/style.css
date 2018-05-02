@@ -1,0 +1,23 @@
+input{
+  width:15px;
+  line-height: 10px;
+  height:10px;
+  text-align: center;
+  position: absolute;
+  top:45px;
+  border-radius: 5px;
+}
+p{
+  text-align: center;
+}
+#numberb,#numberc{
+  display: none;
+}
+#numberc{
+  top:18px;
+}
+.container{
+  width:875px;
+  max-width: 100%;
+  margin:0 auto;
+}

@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -8,16 +7,21 @@
   <meta name="description" content="uchi.ru test task">
   <meta name="author" content="Simon Rusin">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <link rel="stylesheet" href="css/style.css?v=1.0">
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
 </head>
 <body>
-  <canvas id="myCanvas" width="875" height="100" style="border:1px solid red"></canvas>
-  <img src="img/sprite.png">
+  <div class="container">
+    <p id="task" ></p>
 
+    <input type="text" onkeyup="onchangeInput(this)" id="numbera">
+    <input type="text" onkeyup="onchangeInput(this)" id="numberb">
+    <input type="text" onkeyup="onchangeInput(this)" id="numberc">
+    <canvas id="myCanvas" width="875" height="120" style="background:url('img/sprite.png') bottom left no-repeat"></canvas>
+  </div>
   <script>
     var amax = 9,
     amin = 6,
@@ -28,14 +32,68 @@
     var b = ab-a;
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
+    var posx = 36+a*38.8;
+    var posy = 60;
     ctx.beginPath();
-    ctx.arc(53+a*10,100,20*a,Math.PI,2*Math.PI);
-    ctx.fillText(a+" + "+b+" = "+ab,10,50);
-    document.createElement('canvas')
-    ctx.moveTo(145,50);
-    ctx.lineTo(160,50);
-    ctx.lineTo(160,65);
-    ctx.stroke();
+    taskInit();
+    function taskInit(){
+      document.getElementById("task").innerHTML = "<span id='taska'>"+a+"</span> + <span id='taskb'>"+b+"</span> = ?";
+      drawA();
+      document.getElementById("numbera").style.left=25+posx/1.3+'px';
+      document.getElementById("numbera").focus();
+    }
+    function onchangeInput(input){
+      id = input.id.slice(-1);
+      if(id=='a'){
+        if(input.value==a){
+          document.getElementById("task"+id).style.background = 'transparent';
+          input.setAttribute('disabled','disabled');
+          drawB();
+          document.getElementById("numberb").style.left=posx+'px';
+          document.getElementById("numberb").style.display = 'block';
+          document.getElementById("numberb").focus();
+        }else{
+          if(input.value!==``){
+            document.getElementById("task"+id).style.background = 'red';
+          }else{
+            document.getElementById("task"+id).style.background = 'transparent';
+          }
+        }
+      }else if (id=='b') {
+        if(input.value==b){
+          document.getElementById("task"+id).style.background = 'transparent';
+          input.setAttribute('disabled','disabled');
+          document.getElementById("numberc").style.left=566+'px';
+          document.getElementById("numberc").style.display='block';
+          document.getElementById("numberc").focus();
+        }else{
+          if(input.value!==``){
+            document.getElementById("task"+id).style.background = 'red';
+          }else{
+            document.getElementById("task"+id).style.background = 'transparent';
+          }
+        }
+      }else if (id='c') {
+            if(input.value==ab){
+              input.setAttribute('disabled','disabled');
+            }
+      }
+    }
+    function drawA(){
+      ctx.ellipse(36+a*19.4, 60, 40, a*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
+      ctx.lineTo(posx+3,52);
+      ctx.moveTo(posx-6,56)
+      ctx.lineTo(posx,60);
+      ctx.stroke();
+    }
+    function drawB(){
+      ctx.ellipse(posx+b*19.4, posy, 40, b*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
+      posx = posx+b*38.8;
+      ctx.lineTo(posx+3,52);
+      ctx.moveTo(posx-6,56)
+      ctx.lineTo(posx,60);
+      ctx.stroke();
+    }
   </script>
 
   <script src="js/scripts.js"></script>

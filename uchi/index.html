@@ -37,21 +37,18 @@
     ctx.beginPath();
     taskInit();
     function taskInit(){
-      document.getElementById("task").innerHTML = "<span id='taska'>"+a+"</span> + <span id='taskb'>"+b+"</span> = ?";
       drawA();
-      document.getElementById("numbera").style.left=25+posx/1.3+'px';
-      document.getElementById("numbera").focus();
+      posNumA();
     }
     function onchangeInput(input){
       id = input.id.slice(-1);
       if(id=='a'){
         if(input.value==a){
           document.getElementById("task"+id).style.background = 'transparent';
-          input.setAttribute('disabled','disabled');
+          //input.setAttribute('disabled','disabled');
+          input.replaceWith('<span>'+input.value+'</span>');
           drawB();
-          document.getElementById("numberb").style.left=posx+'px';
-          document.getElementById("numberb").style.display = 'block';
-          document.getElementById("numberb").focus();
+          posNumB();
         }else{
           if(input.value!==``){
             document.getElementById("task"+id).style.background = 'red';
@@ -63,9 +60,7 @@
         if(input.value==b){
           document.getElementById("task"+id).style.background = 'transparent';
           input.setAttribute('disabled','disabled');
-          document.getElementById("numberc").style.left=566+'px';
-          document.getElementById("numberc").style.display='block';
-          document.getElementById("numberc").focus();
+          posNumC();
         }else{
           if(input.value!==``){
             document.getElementById("task"+id).style.background = 'red';
@@ -93,6 +88,21 @@
       ctx.moveTo(posx-6,56)
       ctx.lineTo(posx,60);
       ctx.stroke();
+    }
+    function posNumB(){
+      document.getElementById("numberb").style.left=posx+'px';
+      document.getElementById("numberb").style.display = 'block';
+      document.getElementById("numberb").focus();
+    }
+    function posNumA(){
+      document.getElementById("task").innerHTML = "<span id='taska'>"+a+"</span> + <span id='taskb'>"+b+"</span> = ?";
+      document.getElementById("numbera").style.left=25+posx/1.3+'px';
+      document.getElementById("numbera").focus();
+    }
+    function posNumC(){
+      document.getElementById("numberc").style.left=566+'px';
+      document.getElementById("numberc").style.display='block';
+      document.getElementById("numberc").focus();
     }
   </script>
 

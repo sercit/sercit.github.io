@@ -32,8 +32,8 @@
     var b = ab-a;
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
-    var posx = 36+a*38.8;
-    var posy = 60;
+    var posx = 37+a*19.4;
+    var posy = 25;
     ctx.beginPath();
     taskInit();
     function taskInit(){
@@ -44,65 +44,85 @@
       id = input.id.slice(-1);
       if(id=='a'){
         if(input.value==a){
-          document.getElementById("task"+id).style.background = 'transparent';
-          //input.setAttribute('disabled','disabled');
-          input.replaceWith('<span>'+input.value+'</span>');
+          replaceInput(input);
           drawB();
           posNumB();
         }else{
-          if(input.value!==``){
-            document.getElementById("task"+id).style.background = 'red';
-          }else{
-            document.getElementById("task"+id).style.background = 'transparent';
-          }
+          markWrong(input);
         }
       }else if (id=='b') {
         if(input.value==b){
-          document.getElementById("task"+id).style.background = 'transparent';
-          input.setAttribute('disabled','disabled');
+          replaceInput(input);
           posNumC();
         }else{
-          if(input.value!==``){
-            document.getElementById("task"+id).style.background = 'red';
-          }else{
-            document.getElementById("task"+id).style.background = 'transparent';
-          }
+          markWrong(input);
         }
       }else if (id='c') {
             if(input.value==ab){
-              input.setAttribute('disabled','disabled');
+              replaceQuestionMark(input);
             }
       }
     }
     function drawA(){
-      ctx.ellipse(36+a*19.4, 60, 40, a*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
-      ctx.lineTo(posx+3,52);
-      ctx.moveTo(posx-6,56)
-      ctx.lineTo(posx,60);
+      ctx.ellipse(posx, 55, 40, a*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
+      var centerx = posx*2-37;
+      var centery = 60;
+      ctx.lineTo(centerx-6,centery-10);
+      ctx.moveTo(centerx,centery-6)
+      ctx.lineTo(centerx+4,centery-11);
       ctx.stroke();
     }
     function drawB(){
-      ctx.ellipse(posx+b*19.4, posy, 40, b*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
-      posx = posx+b*38.8;
-      ctx.lineTo(posx+3,52);
-      ctx.moveTo(posx-6,56)
-      ctx.lineTo(posx,60);
+      ctx.ellipse(posx*2+b*19.4-37, 55, 40, b*19.4, Math.PI/2, Math.PI/2, 3*Math.PI/2);
+      var centerx = posx*2+b*38.8-37;
+      var centery = 60;
+      posx = posx*2+b*19.4-37;
+      ctx.lineTo(centerx-6,centery-10);
+      ctx.moveTo(centerx,centery-6)
+      ctx.lineTo(centerx+4,centery-11);
       ctx.stroke();
     }
     function posNumB(){
-      document.getElementById("numberb").style.left=posx+'px';
+      document.getElementById("numberb").style.left=(posx-10)+'px';
       document.getElementById("numberb").style.display = 'block';
       document.getElementById("numberb").focus();
     }
     function posNumA(){
-      document.getElementById("task").innerHTML = "<span id='taska'>"+a+"</span> + <span id='taskb'>"+b+"</span> = ?";
-      document.getElementById("numbera").style.left=25+posx/1.3+'px';
+      document.getElementById("task").innerHTML = "<span id='taska'>"+a+"</span> + <span id='taskb'>"+b+"</span> = <span id='taskc'>?</span>";
+      document.getElementById("numbera").style.left=(posx-10)+'px';
       document.getElementById("numbera").focus();
     }
     function posNumC(){
-      document.getElementById("numberc").style.left=566+'px';
+      document.getElementById("numberc").style.left=458+'px';
       document.getElementById("numberc").style.display='block';
       document.getElementById("numberc").focus();
+    }
+    function replaceInput(input){
+      document.getElementById("task"+id).style.background = 'transparent';
+      var div = document.createElement("div");
+      div.style.left = (posx-5)+'px';
+      div.style.top = posy+'px';
+      div.className = 'digit';
+      var digit = document.createTextNode(input.value+'');
+      div.appendChild(digit);
+      input.replaceWith(div);
+    }
+    function replaceQuestionMark(input){
+      var task = document.getElementById("task"+id);
+      task.style.background = 'transparent';
+      var span = document.createElement("span");
+      span.className = "task"+id;
+      var digit = document.createTextNode(input.value+'');
+      span.appendChild(digit);
+      task.replaceWith(span);
+      input.parentNode.removeChild(input);
+    }
+    function markWrong(input){
+      if(input.value!==``){
+        document.getElementById("task"+id).style.background = 'red';
+      }else{
+        document.getElementById("task"+id).style.background = 'transparent';
+      }
     }
   </script>
 

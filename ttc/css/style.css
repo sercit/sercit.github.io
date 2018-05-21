@@ -1,4 +1,11 @@
+@font-face{
+  font-family: "Myriad";
+  src:url('fonts/MyriadPro-Regular.ttf'),url('fonts/MyriadPro-Regular.eot');
+  font-style: normal;
+  font-weight: normal;
+}
 *{
+  font-family: "Myriad";
   margin:0;
   padding:0;
 }
@@ -18,8 +25,7 @@ header{
 .menu__element{
   list-style-type: none;
     float:left;
-    padding-right: 5px;
-    text-indent: 5px;
+    padding: 0 5px;
     line-height: 40px;
     text-transform: uppercase;
 }
@@ -27,11 +33,13 @@ header{
   position: absolute;
   display: none;
   z-index: 1;
-}        e
+  margin-left:-5px;
+}
 .submenu__element{
   list-style-type: none;
     line-height: 27px;
     font-size:8pt;
+    padding:0 5px;
 }
 .submenu__element:hover{
   background:#cccccc;
@@ -75,6 +83,64 @@ header li a{
 .sidebar input[type="text"]:focus,.sidebar input[type="password"]:focus{
   outline:none;
 }
+.sidebar input[type="checkbox"]{
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  margin: 10px 0 0 20px;
+}
+.sidebar input[type="checkbox"] + label {
+  position: relative;
+  cursor: pointer;
+  width:260px;
+  margin:0 auto;
+}
+.sidebar label{
+  display:block;
+  width:260px;
+  margin:0 auto;
+}
+.sidebar label:before {
+  content: "";
+  	display: inline-block;
+  	width: 13px;
+  	height: 13px;
+  	margin-right: 10px;
+  	position: relative;
+  	background-color: #aaa;
+  	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px
+}
+input[type="checkbox"]:checked + label:before{
+  content: '\2228';
+  color: #f3f3f3;
+  font-size: 10pt;
+  color:black;
+  text-align: center;
+  line-height: 16px;
+}
+input[type="submit"]{
+  color:white;
+  border:0;
+  background:#cd1f84;
+  line-height:29px;
+  height:29px;
+  padding:0 9px;
+  margin-left:20px;
+}
+input[type="reset"]{
+  color:white;
+  border:0;
+  background:#1f2fcd;
+  line-height:29px;
+  height:29px;
+  padding:0 9px;
+  margin-left:20px;
+}
+.form{
+  position: absolute;
+  bottom:60px;
+  width:100%;
+}
 .posts{
     width:100%;
     position:relative;
@@ -86,8 +152,32 @@ header li a{
   max-height: 210px;
   position: relative;
   float:left;
-  margin:25px 10px 0;
+  margin:25px 14px 0;
   background:#d3c27a;
+}
+.navigation{
+  width:100%;
+  position:relative;
+}
+.navigation li{
+  list-style-type: none;
+  position:relative;
+  display: inline;
+  cursor:pointer;
+}
+.navigation li.page__active{
+  color:#d62020;
+}
+.navigation ul{
+  display: block;
+  margin:0 auto;
+  text-align:center;
+}
+input:invalid {
+  border:1px solid #f00507 !important;
+}
+input:valid {
+  border:1px solid white !important;
 }
 @media (min-width: 960px) {
   .sidebar{
@@ -100,6 +190,11 @@ header li a{
     float:right;
   }
   .posts{
+    width:70%;
+    position:relative;
+    float:right;
+  }
+  .navigation{
     width:70%;
     position:relative;
     float:right;

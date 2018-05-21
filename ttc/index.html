@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>uchi.ru</title>
+  <title>ttc</title>
   <meta name="description" content="ttc test task">
   <meta name="author" content="Simon Rusin">
 
@@ -119,18 +119,55 @@
         <div class="clear"></div>
       </div>
       <div class="clear"></div>
+      <div class="navigation">
+        <ul>
+          <li class="page page__active" page="1" onclick="choosePage(this.getAttribute('page'));"><span>1</span></li>
+          <li class="page" page="2" onclick="choosePage(this.getAttribute('page'));"><span>2</span></li>
+          <li class="page" page="3" onclick="choosePage(this.getAttribute('page'));"><span>3</span></li>
+          <li class="page" page="4" onclick="choosePage(this.getAttribute('page'));"><span>4</span></li>
+        </ul>
+      </div>
     <div class="sidebar">
-      <form action="">
-            <input type="text" placeholder="Текстовое поле">
-            <input type="password" placeholder="Пароль">
-            <input type="checkbox" name="agreement">
-            <label for="agreement">Я согласен с пользовательским соглашением</label>
-            <button type="submit">Отправить</button>
-            <button type="reset">Сбросить</button>
+      <div class="form">
+        <form action="">
+            <input type="text" placeholder="Текстовое поле" required pattern="[A-Za-z]{0,6}">
+            <input type="password" placeholder="Пароль" required>
+            <div class="checkbox">
+              <input type="checkbox" name="agreement" id="agreement">
+              <label for="agreement">Я согласен с пользовательским соглашением</label>
+            </div>
+            <input type="submit" value="Отправить">
+            <input type="reset" value="Сбросить">
           </form>
+        </div>
   </div>
   <div class="clear"></div>
 </div>
+  <script>
+      var elementsOnPage = 6;
+      function choosePage(activePage){
+        activePage = Number(activePage);
+          var pages = document.getElementsByClassName('page');
+          [].forEach.call(pages, function(v,i,a){
+            if(pages[i].classList.contains('page__active')){
+              pages[i].classList.remove('page__active');
+            }
+          });
+          pages[activePage-1].classList.add('page__active');
+          var posts = document.getElementsByClassName('post');
+          [].forEach.call(posts, function(v,i,a){
+            if(i<elementsOnPage*activePage && i>=elementsOnPage*(activePage-1)){
+              v.style.display = 'block';
+            }else{
+              v.style.display = 'none';
+            }
+          });
+      }
+      window.onload= function(){
+        choosePage(1);
+      };
+
+  </script>
   <script src="js/scripts.js"></script>
 </body>
 </html>

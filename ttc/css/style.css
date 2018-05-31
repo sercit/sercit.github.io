@@ -144,6 +144,7 @@ input[type="reset"]{
 .posts{
     width:100%;
     position:relative;
+    float:left;
 }
 .post{
   padding:15px;
@@ -158,6 +159,7 @@ input[type="reset"]{
 .navigation{
   width:100%;
   position:relative;
+  float:left;
 }
 .navigation li{
   list-style-type: none;

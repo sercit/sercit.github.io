@@ -141,9 +141,9 @@ footer .tarifs li{
   width:100%;
   float:left;
   list-style-type: square;
+  color:white;
 }
 footer .tarifs a{
-  color:white;
   text-decoration: none;
 }
 footer .tarifs a:hover{

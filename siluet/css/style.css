@@ -64,7 +64,6 @@ header{
   width:100%;
   background: white;
   z-index: 1;
-  max-height: 20%;
 }
 header .logo,header .navigation, header .info{
   height: 106px;
@@ -97,6 +96,12 @@ header .info{
   position: absolute;
   bottom:0;
 }
+.about{
+  border-right:10px solid white;
+}
+.description{
+  border-left:10px solid white;
+}
 .bg-dark-grey{
   background:#777777
 }
@@ -124,10 +129,16 @@ footer .menu li{
   float:left;
 }
 footer .tarifs li{
-  display: block;
   width:100%;
   float:left;
   list-style-type: square;
+}
+footer .tarifs a{
+  color:white;
+  text-decoration: none;
+}
+footer .tarifs a:hover{
+  color:white;
 }
 footer .right div{
   height:75px;

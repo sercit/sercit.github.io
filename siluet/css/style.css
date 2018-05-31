@@ -74,6 +74,15 @@ header .logo,header .navigation, header .info{
 header .info{
   text-align: right;
 }
+header .info a{
+  float: right;
+    width: 100%;
+}
+header .info span{
+  display: inline-block;
+width: 100%;
+margin-top: 20px;
+}
 .content{
   margin-top:150px;
   margin-bottom:247px;
